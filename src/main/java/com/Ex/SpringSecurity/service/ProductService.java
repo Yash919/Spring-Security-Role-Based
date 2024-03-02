@@ -45,7 +45,7 @@ public class  ProductService {
         return productList.stream()
                 .filter(product -> product.getProductId() == id)
                 .findAny()
-                .orElseThrow(() -> new RuntimeException("product " + id + " not found"));
+                .orElse(null);
     }
 
     public String addUser(UserInfo userInfo){

@@ -31,8 +31,14 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public Product getProductById(@PathVariable int id) {
-        return productService.getProduct(id);
+    public ResponseEntity<?> getProductById(@PathVariable int id) {
+
+        Product product = productService.getProduct(id);
+        if(product!=null){
+            return ResponseEntity.ok(product);
+        }
+        String errormessage = "Product with ID " + id + " not found";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errormessage);
     }
 
     @PutMapping("/{id}")
