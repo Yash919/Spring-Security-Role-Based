@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -62,6 +63,18 @@ public class  ProductService {
                 existingProduct.setQty(product.getQty());
                 existingProduct.setPrice(product.getPrice());
                 return true; // Return true indicating successful update
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteProduct(int id) {
+        Iterator<Product> iterator = productList.iterator();
+        while(iterator.hasNext()){
+            Product existProduct = iterator.next();
+            if(existProduct.getProductId() == id){
+                iterator.remove();
+                return true;
             }
         }
         return false;

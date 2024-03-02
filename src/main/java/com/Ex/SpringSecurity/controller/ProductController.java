@@ -46,6 +46,17 @@ public class ProductController {
         return new ResponseEntity<>("Product not updated. No Product found with ID " + id,HttpStatus.NOT_FOUND);
     }
 
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<String> deleteProduct(@PathVariable int id){
+        boolean isProductPresent = productService.deleteProduct(id);
+
+        if(isProductPresent){
+            return new ResponseEntity<>("Product with id: "+id+" Deleted Successfully.",HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Product with id: "+id+" not present.",HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/new")
     public String addNewUser(@RequestBody UserInfo userInfo){
         return productService.addUser(userInfo);
