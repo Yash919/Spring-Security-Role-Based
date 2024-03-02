@@ -53,4 +53,17 @@ public class  ProductService {
         return "user added to system";
     }
 
+    public boolean updateProduct(Product product, int id) {
+
+        for (Product existingProduct : productList) {
+            if (existingProduct.getProductId() == id) {
+                // Update product details
+                existingProduct.setName(product.getName());
+                existingProduct.setQty(product.getQty());
+                existingProduct.setPrice(product.getPrice());
+                return true; // Return true indicating successful update
+            }
+        }
+        return false;
+    }
 }

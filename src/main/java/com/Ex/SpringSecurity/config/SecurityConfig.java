@@ -47,6 +47,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/products/welcome").permitAll()
                         .requestMatchers(HttpMethod.POST, "/products/new").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/products/**").authenticated()
                         .anyRequest().denyAll())
                 .httpBasic();
         return http.build();
