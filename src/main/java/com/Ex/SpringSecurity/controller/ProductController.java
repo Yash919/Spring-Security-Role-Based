@@ -68,5 +68,11 @@ public class ProductController {
         return productService.addUser(userInfo);
     }
 
+    @PostMapping("/newProduct")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<?> addNewProduct(@RequestBody Product product){
+        return productService.addProduct(product);
+    }
+
 }
 

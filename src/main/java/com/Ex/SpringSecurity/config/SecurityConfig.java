@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.GET, "/products/welcome").permitAll()
                         .requestMatchers(HttpMethod.POST, "/products/new").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/products/newProduct").authenticated()
                         .requestMatchers(HttpMethod.GET, "/products/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/products/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/products/**").authenticated()

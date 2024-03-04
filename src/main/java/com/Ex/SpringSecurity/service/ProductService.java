@@ -5,6 +5,8 @@ import com.Ex.SpringSecurity.entity.UserInfo;
 import com.Ex.SpringSecurity.repository.UserInfoRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import java.util.stream.IntStream;
 public class  ProductService {
 
     List<Product> productList = null;
+    private int productIdCounter = 101;
 
     @Autowired
     private UserInfoRepository repository;
@@ -78,5 +81,14 @@ public class  ProductService {
             }
         }
         return false;
+    }
+
+    public ResponseEntity<?> addProduct(Product product) {
+        // Check if name is empty or not.
+        if (product.getName() == null || product.getName().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product name cannot be empty. Failed to add product");
+        }
+        product.setProductId(productIdCounter++);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Product added successfully with Id: " + product.getProductId());
     }
 }
