@@ -47,7 +47,7 @@ public class ProductController {
         boolean isProductUpdated =  productService.updateProduct(product,id);
 
         if(isProductUpdated){
-            return new ResponseEntity<>("Product Updated Successfully. ", HttpStatus.OK);
+            return new ResponseEntity<>("Product with ID: "+ id +". Updated Successfully. ", HttpStatus.OK);
         }
         return new ResponseEntity<>("Product not updated. No Product found with ID " + id,HttpStatus.NOT_FOUND);
     }
